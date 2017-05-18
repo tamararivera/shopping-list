@@ -51,6 +51,7 @@ function populateTable() {
 		row.append('<button class="delete">Delete</button>');
 		table.append(row);
 		editButtonBinding(item, index);
+		deleteButtonBinding(index);
 	});
 
 }
@@ -61,6 +62,13 @@ function editButtonBinding(item, index) {
 			$('#description').val(item.description);
 			$('#quantity').val(item.quantity);
 			$('#index').val(index);
+	});
+}
+
+function deleteButtonBinding(index) {
+	$('button.delete').on('click', function() {
+		items.splice(index, 1);
+		populateTable();
 	});
 }
 

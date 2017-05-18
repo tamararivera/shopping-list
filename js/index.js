@@ -53,14 +53,14 @@ function populateTable() {
 		var row = $('<tr><td>'+ item.description +'</td><td>' + item.quantity + '</td></tr>');
 		row.append('<td><button class="edit">Edit</button><button class="delete">Delete</button></td>');
 		table.append(row);
-		editButtonBinding(item, index);
-		deleteButtonBinding(index);
+		editButtonBinding(item, index, row);
+		deleteButtonBinding(index, row);
 	});
 
 }
 
-function editButtonBinding(item, index) {
-	$('button.edit').on('click', function() {
+function editButtonBinding(item, index, row) {
+	row.find('button.edit').on('click', function() {
 			toggleSections();
 			$('#description').val(item.description);
 			$('#quantity').val(item.quantity);
@@ -68,8 +68,8 @@ function editButtonBinding(item, index) {
 	});
 }
 
-function deleteButtonBinding(index) {
-	$('button.delete').on('click', function() {
+function deleteButtonBinding(index, row) {
+	row.find('button.delete').on('click', function() {
 		items.splice(index, 1);
 		populateTable();
 	});

@@ -17,6 +17,10 @@ function clearInputs() {
 	$('#index').val('');
 }
 
+$('#formSubmit').one('click', function () {
+	$('#itemsTable table').removeClass('hidden');
+});
+
 $('#formSubmit').on('click', formSubmited);
 
 function formSubmited() {
@@ -47,8 +51,7 @@ function populateTable() {
 	table.html('');
 	items.forEach(function (item, index) {
 		var row = $('<tr><td>'+ item.description +'</td><td>' + item.quantity + '</td></tr>');
-		row.append('<button class="edit">Edit</button>');
-		row.append('<button class="delete">Delete</button>');
+		row.append('<td><button class="edit">Edit</button><button class="delete">Delete</button></td>');
 		table.append(row);
 		editButtonBinding(item, index);
 		deleteButtonBinding(index);

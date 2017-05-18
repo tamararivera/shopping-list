@@ -1,13 +1,16 @@
 main {
   padding-left: 10%;
-}
-
-main * {
-	margin-bottom: 0.5rem;
+  width: 80%;
+  text-align: center;
 }
 
 h1 {
 	text-align: center;
+	margin-bottom: 1rem;
+}
+
+table {
+	margin: 1rem auto;
 }
 
 table, th, td  {
@@ -20,6 +23,32 @@ label {
 	display: block;
 }
 
+button {
+    color: #fff;
+    background-color: #5bc0de;
+    border-color: #5bc0de;
+    line-height: 1.25;
+    border: 1px solid transparent;
+    padding: .5rem 1rem;
+    font-size: 1rem;
+    border-radius: .25rem;
+    transition: all .2s ease-in-out;
+}
+
+button:hover {
+    color: #fff;
+    background-color: #31b0d5;
+    border-color: #2aabd2;
+}
+
 .hidden {
 	display: none;
+}
+
+#addForm form > * {
+	margin-bottom: 1rem;
+}
+
+.edit {
+	margin-right: 0.5rem;
 }

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My shopping list</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="styles/main.css">
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>My shopping list</h1>
+      </header>
+      <section id="itemsTable">
+        <button id="addItem">Add a new item</button>
+        <table class="hidden">
+          <thead>
+            <tr>
+              <th>Description</th>
+              <th>Quantity</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+      <section id="addForm" class="hidden">
+        <form>
+          <label>
+            Description
+            <input id="description" type="text">
+          </label>
+          <label>
+            Quantity
+            <input id="quantity" type="number">
+          </label>
+          <input type="hidden" id="index">
+          <input type="hidden" id="uniqueId">
+          <button id="formSubmit">Submit</button>
+          <button id="formCancel">Cancel</button>
+        </form>
+      </section>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/restApi.js"></script>
+  </body>
+</html>

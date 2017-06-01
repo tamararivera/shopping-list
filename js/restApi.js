@@ -54,8 +54,8 @@ function formSubmited() {
 	}
 	if(description && quantity) {
 		if($.isNumeric(index)) {
-			item.id = id;
-			updateElement(item);
+			item._id = id;
+			updateElement(item, index);
 		}
 		else {
 			addElement(item);
@@ -70,13 +70,15 @@ function formSubmited() {
 function updateElement(item, index) {
 	items[index].description = item.description;
 	items[index].quantity = item.quantity;
-	items[index].id = item.id;
+	items[index]._id = item._id;
 
-	$.ajax( url + '/' + item.id,
+	$.ajax( url + '/' + item._id,
     {
         method: 'PUT',
         data: item,
-        success: aSuccess,
+        success: function (response) {
+        	populateTable();
+        },
         error: reportAjaxError
     } );
 			
@@ -88,13 +90,12 @@ function addElement(item) {
     {
         method: 'POST',
         data: item,
-        success: aSuccess,
+        success: function (response) {
+        	item._id = response.created;
+    		populateTable();
+        },
         error: reportAjaxError
     } );
-}
-
-function aSuccess( response ) {
-    populateTable();
 }
 
 function reportAjaxError( jqXHR, textStatus, errorThrown ) {
@@ -129,6 +130,7 @@ function editButtonBinding(item, index, row) {
 			$('#description').val(item.description);
 			$('#quantity').val(item.quantity);
 			$('#index').val(index);
+			$('#uniqueId').val(item._id);
 	});
 }
 

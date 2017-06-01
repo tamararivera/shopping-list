@@ -68,14 +68,19 @@ function formSubmited() {
 }
 
 function updateElement(item, index) {
+
 	items[index].description = item.description;
 	items[index].quantity = item.quantity;
 	items[index]._id = item._id;
 
+
 	$.ajax( url + '/' + item._id,
     {
         method: 'PUT',
-        data: item,
+        data: {
+        	description: item.description,
+        	quantity: item.quantity
+        },
         success: function (response) {
         	populateTable();
         },

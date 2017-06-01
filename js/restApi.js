@@ -1,12 +1,6 @@
 var items = [];
 var url = 'https://pacific-meadow-64112.herokuapp.com/data-api/trivera';
 
-/*if(localStorage["ShoppingList_Items"]) {
-	$('#itemsTable table').removeClass('hidden');
-	items = JSON.parse(localStorage["ShoppingList_Items"]);
-	populateTable();
-}*/
-
 $.ajax( url,
     {
         method: 'GET',
@@ -67,6 +61,12 @@ function formSubmited() {
 	event.preventDefault();
 }
 
+$('#formCancel').on('click', function () {
+	toggleSections();
+	clearInputs();
+	event.preventDefault();
+});
+
 function updateElement(item, index) {
 
 	items[index].description = item.description;
@@ -98,6 +98,18 @@ function addElement(item) {
         success: function (response) {
         	item._id = response.created;
     		populateTable();
+        },
+        error: reportAjaxError
+    } );
+}
+
+function deleteElement(index, id){
+	items.splice(index, 1);
+	$.ajax( url+ '/' + id,
+    {
+        method: 'DELETE',
+        success: function (response) {
+        	populateTable();
         },
         error: reportAjaxError
     } );
@@ -139,26 +151,8 @@ function editButtonBinding(item, index, row) {
 	});
 }
 
-function deleteElement(index, id){
-	items.splice(index, 1);
-	$.ajax( url+ '/' + id,
-    {
-        method: 'DELETE',
-        success: function (response) {
-        	populateTable();
-        },
-        error: reportAjaxError
-    } );
-}
-
 function deleteButtonBinding(index, id, row) {
 	row.find('button.delete').on('click', function() {
 		deleteElement(index, id);
 	});
 }
-
-$('#formCancel').on('click', function () {
-	toggleSections();
-	clearInputs();
-	event.preventDefault();
-});

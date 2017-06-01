@@ -108,7 +108,7 @@ function reportAjaxError( jqXHR, textStatus, errorThrown ) {
     if ( jqXHR.responseText ) {
         msg += '\n' + 'Response text: ' + jqXHR.responseText;
     }
-    $('#response').text( msg );
+    console.log(msg);
 }
 
 function populateTable() {
@@ -119,7 +119,7 @@ function populateTable() {
 		row.append('<td><button class="edit">Edit</button><button class="delete">Delete</button></td>');
 		table.append(row);
 		editButtonBinding(item, index, row);
-		deleteButtonBinding(index, row);
+		deleteButtonBinding(index, item._id, row);
 	});
 
 }
@@ -134,11 +134,21 @@ function editButtonBinding(item, index, row) {
 	});
 }
 
-function deleteButtonBinding(index, row) {
+function deleteElement(index, id){
+	items.splice(index, 1);
+	$.ajax( url+ '/' + id,
+    {
+        method: 'DELETE',
+        success: function (response) {
+        	populateTable();
+        },
+        error: reportAjaxError
+    } );
+}
+
+function deleteButtonBinding(index, id, row) {
 	row.find('button.delete').on('click', function() {
-		items.splice(index, 1);
-		populateTable();
-		//storeItems();
+		deleteElement(index, id);
 	});
 }
 
